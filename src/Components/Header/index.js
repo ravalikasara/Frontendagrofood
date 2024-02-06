@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import Popup from 'reactjs-popup';
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 import { MdAccountCircle,MdOutlineLogout,MdMenu } from "react-icons/md";
 import {FaSearch,FaCartArrowDown,FaRegHeart} from 'react-icons/fa'
 import Cookies from 'js-cookie'
@@ -19,7 +19,7 @@ class Header extends Component {
   
   logout=()=>{
     Cookies.remove('jwt_token')
-    window.location.replace('/login')
+    this.props.history.push('/login')
   }
 
   onMenuClick=()=>{
@@ -28,6 +28,7 @@ class Header extends Component {
 
   render() {
     const {isMenuClicked}=this.state
+    console.log(this.props)
     console.log(isMenuClicked)
     return(
       <AgriContext.Consumer>
@@ -143,4 +144,4 @@ return(
   }
 }
 
-export default Header;
+export default withRouter(Header);

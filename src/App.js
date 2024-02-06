@@ -1,8 +1,7 @@
 
-
 import {Component}  from 'react'
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route,withRouter} from "react-router-dom";
+
 import AgriContext from './agriContext';
 import Home from "./Components/Home";
 import Login from './Components/Login';
@@ -57,12 +56,10 @@ class App extends Component {
   onAddCart=async(id)=>{
  
     const {isUserLoggedIn,userDetails}=this.state;
-   
-   console.log(this.props)
     if(isUserLoggedIn)
     {
 
-      const answer = await fetch(`https://powerful-gear-bull.cyclic.app/add-cart?id=${id}&user_id=${userDetails._id}&quantity=1`);
+      const answer = await fetch(`https://tiny-foal-cardigan.cyclic.app/add-cart?id=${id}&user_id=${userDetails._id}&quantity=1`);
 console.log(answer)
       this.getCartItems()
     
@@ -70,10 +67,12 @@ console.log(answer)
      
     }
     else{
-     
-      window.location.replace('/login')
+      this.props.history.replace('/login')
     }
    
+   
+
+ 
   } 
 
 
@@ -85,10 +84,11 @@ console.log(answer)
     if(isUserLoggedIn)
     {
 
-      const answer = await fetch(`https://powerful-gear-bull.cyclic.app/add-wishlist?id=${id}&user_id=${userDetails._id}`);
+      const answer = await fetch(`https://tiny-foal-cardigan.cyclic.app/add-wishlist?id=${id}&user_id=${userDetails._id}`);
       if(answer.ok){
         this.getwishListItems()
       }
+   
 
      
     
@@ -97,8 +97,8 @@ console.log(answer)
      
     }
     else{
-     
-      window.location.replace('/login')
+      this.props.history.replace('/cart')
+   
     }
   } 
   
@@ -106,7 +106,7 @@ console.log(answer)
 getCartItems=async()=>{
     const {userDetails}=this.state;
 
-const answer= await fetch(`https://powerful-gear-bull.cyclic.app/cart?user_id=${userDetails._id}`)
+const answer= await fetch(`https://tiny-foal-cardigan.cyclic.app/cart?user_id=${userDetails._id}`)
 const data=await answer.json()
 console.log(data.data,"cart")
 this.setState({cart:data.data})
@@ -117,7 +117,7 @@ this.getwishListItems()
   getwishListItems=async()=>{
     const {userDetails}=this.state;
 
-const answer= await fetch(`https://powerful-gear-bull.cyclic.app/wishlist?user_id=${userDetails._id}`)
+const answer= await fetch(`https://tiny-foal-cardigan.cyclic.app/wishlist?user_id=${userDetails._id}`)
 const data=await answer.json()
 console.log(data.data,"wishlist")
 this.setState({wishlist:data.data})
@@ -130,7 +130,7 @@ this.getAllCategories()
     const {isUserLoggedIn,userDetails}=this.state;
     if(isUserLoggedIn){
       console.log(id,userDetails._id,"add")
-      const answer = await fetch(`https://powerful-gear-bull.cyclic.app/add-quantity?id=${id}&user_id=${userDetails._id}`);
+      const answer = await fetch(`https://tiny-foal-cardigan.cyclic.app/add-quantity?id=${id}&user_id=${userDetails._id}`);
    
 this.getCartItems()
      
@@ -143,7 +143,7 @@ this.getCartItems()
     if(isUserLoggedIn)
     {
 
-      const answer = await fetch(`https://powerful-gear-bull.cyclic.app/remove-quantity?id=${id}&user_id=${userDetails._id}`);
+      const answer = await fetch(`https://tiny-foal-cardigan.cyclic.app/remove-quantity?id=${id}&user_id=${userDetails._id}`);
      
 
       this.getCartItems()
@@ -168,7 +168,7 @@ this.getCartItems()
     const jwtToken=Cookies.get('jwt_token')
   console.log(jwtToken)
     this.setState({status:"LOADING"})
-    const url="https://powerful-gear-bull.cyclic.app/user-info"
+    const url="https://tiny-foal-cardigan.cyclic.app/user-info"
     const options={
       method:"POST",
       headers:{
@@ -199,7 +199,7 @@ this.getCartItems()
   getAllCategories = async () => {
 
      this.setState({status:"LOADING"})
-    const answer = await fetch(`https://powerful-gear-bull.cyclic.app/categories`);
+    const answer = await fetch(`https://tiny-foal-cardigan.cyclic.app/categories`);
 
     if (answer.ok) {
       const data = await answer.json();
@@ -250,7 +250,7 @@ this.getCartItems()
    
   
     const answer = await fetch(
-      `https://powerful-gear-bull.cyclic.app/items?sort_by=${sortBy}&order=${order}&search_q=${searchInput}&category_id=${category}`
+      `https://tiny-foal-cardigan.cyclic.app/items?sort_by=${sortBy}&order=${order}&search_q=${searchInput}&category_id=${category}`
     );
     if (answer.ok) {
       const data = await answer.json();
@@ -291,7 +291,7 @@ this.getCartItems()
 
   onRemoveCart=async(user_id,product_id)=>{
   console.log(user_id,product_id)
-    const url =`https://powerful-gear-bull.cyclic.app/remove-cart?user_id=${user_id}&product_id=${product_id}`;
+    const url =`https://tiny-foal-cardigan.cyclic.app/remove-cart?user_id=${user_id}&product_id=${product_id}`;
     
     const data = await fetch(url)
 
@@ -302,7 +302,7 @@ this.getCartItems()
 
   onRemoveWishlist=async(user_id,product_id)=>{
     console.log(user_id,product_id)
-      const url =`https://powerful-gear-bull.cyclic.app/remove-wishlist?user_id=${user_id}&product_id=${product_id}`;
+      const url =`https://tiny-foal-cardigan.cyclic.app/remove-wishlist?user_id=${user_id}&product_id=${product_id}`;
       
       const data = await fetch(url)
   
@@ -313,26 +313,34 @@ this.getCartItems()
   
 
    
-
+onRedirect=()=>{
+  window.location.replace('/')
+this.getAllProducts()
+}
 
     
 
-    onOrderDetails=async(details,e)=>{
+    onOrderDetails=async(details)=>{
         
         const {cart,userDetails}=this.state;
-        console.log(details,"hjhgdjhA")
+       
+
+       const  onRedirect=()=>{
+       
+          this.onRedirect()
+        }
 
         let amount=0;
           const amountMap = cart.map((each)=>{
             amount+=(each.price * each.quantity)
             
           })
-          console.log(amount)
+          
           
          amount=amount * 100
           const currency="INR"
           const receiptId='qdfjhgjhgf';
-          const response = await fetch('https://powerful-gear-bull.cyclic.app/order',{
+          const response = await fetch('https://tiny-foal-cardigan.cyclic.app/order',{
               method:"POST",
               body:JSON.stringify({
                   amount,
@@ -345,10 +353,10 @@ this.getCartItems()
           })
       
           const order = await response.json();
-       console.log(order)
+    
         if(response.ok){
     
-          const status = await fetch('https://powerful-gear-bull.cyclic.app/order-details',{
+          const status = await fetch('https://tiny-foal-cardigan.cyclic.app/order-details',{
 
             method:"POST",
             body:JSON.stringify({
@@ -361,7 +369,7 @@ this.getCartItems()
                 'Content-Type':"application/json"
         }
         })
-        console.log(status)
+
        
         if(status.ok){
           
@@ -377,8 +385,8 @@ this.getCartItems()
                 const body ={
                     ...response,
                 };
-                console.log(body)
-                const validateRes = await fetch('https://powerful-gear-bull.cyclic.app/order/validate',{
+               
+                const validateRes = await fetch('https://tiny-foal-cardigan.cyclic.app/order/validate',{
                     method:"POST",
                     body:JSON.stringify(body),
                     headers:{
@@ -388,10 +396,10 @@ this.getCartItems()
               
                 const jsonRes = await validateRes.json()
               
-                if(validateRes.ok){
-                  window.location.href = '/'; 
-                }
-                
+               if(validateRes.ok){
+             
+            onRedirect()
+               }
       
             },
       
@@ -435,19 +443,26 @@ this.getCartItems()
   render(){
 
     const {data,categories,selectedCategory,searchInput,activeOptionId,userDetails,isUserLoggedIn,status,cart,wishlist}=this.state;
-   console.log(wishlist)
+ 
     return(
       <Router>
       <AgriContext.Provider value={{data,categories,selectedCategory,cart,wishlist,searchInput,activeOptionId,sortbyOptions,userDetails,isUserLoggedIn,status,inputChange: this.inputChange,getAllProducts:this.getAllProducts,onCategoryChange:this.onCategoryChange,sortChange:this.sortChange,onAddCart:this.onAddCart, onRemoveCart:this.onRemoveCart,onIncreaseQuantity:this.onIncreaseQuantity,onDecreaseQuantity:this.onDecreaseQuantity,onAddWishlist:this.onAddWishlist,getwishListItems:this.getwishListItems,onRemoveWishlist:this.onRemoveWishlist,onPlaceOrder:this.onPlaceOrder, onOrderDetails:this. onOrderDetails}}>
 
-<Routes>
-  <Route exact  path="/" element={<Home />} />
-  <Route exact path='/login' element={<Login />} />
-  <Route exact path='/register' element={<Register />} />
-  <Route exact path='/cart' element={<Cart />} />
-  <Route exact path='/wishlist' element={<Wishlist />} />
-  <Route exact path='/order' element={<OrderPage/>}/>
-    </Routes>
+      <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+  exact
+  path='/login'
+  render={(props) => (
+    <Login {...props} getAllProducts={this.getAllProducts} />
+  )}
+/>
+ <Route exact path='/register' component={Register} />
+            <Route exact path='/cart' component={Cart}  />
+            <Route exact path='/wishlist' component={Wishlist} />
+            <Route exact path='/order' component={OrderPage} />
+          </Switch>
+
 
   </AgriContext.Provider>
   </Router>
@@ -458,4 +473,4 @@ this.getCartItems()
 
 
 
-export default App;
+export default withRouter(App);

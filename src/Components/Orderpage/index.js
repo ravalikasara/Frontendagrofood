@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 
 import AgriContext from "../../agriContext";
 import Cookies from 'js-cookie'
@@ -15,7 +15,9 @@ class OrderPage extends Component {
   onSubmitSuccess = ()=> {
 
 
-    window.location.replace('/login')
+    console.log(this.props)
+    window.location.replace('/')
+   
 
   
   }
@@ -120,4 +122,4 @@ class OrderPage extends Component {
 }
 
 
-export default OrderPage
+export default withRouter(OrderPage)

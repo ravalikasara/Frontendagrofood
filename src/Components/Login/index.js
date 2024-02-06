@@ -1,16 +1,17 @@
 import React,{useState,Component} from 'react'
 import {auth,google,facebook,twitter} from './config/fire'
 import {signInWithPopup,signOut} from 'firebase/auth'
-
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 import { FaFacebookF } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import Cookies from 'js-cookie'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 
 import './index.css'
 
 import googleImg from '../../../src/icons8-google-48.png'
+import AgriContext from '../../agriContext';
 
 
 class Login extends Component {
@@ -20,7 +21,7 @@ class Login extends Component {
   setSocialAuthorization=async(details)=>{
 
    const userDetails = {username:details.displayName, email:details.email,profileImg:details.photoURL}
-   const url=`https://powerful-gear-bull.cyclic.app/social-login`
+   const url=`https://tiny-foal-cardigan.cyclic.app/social-login`
        const options = {
          method: 'POST',
          headers: {
@@ -39,26 +40,30 @@ class Login extends Component {
     
   }
 
-  onSubmitSuccess = jwtToken => {
+  onSubmitSuccess = (jwtToken,getAllProducts) => {
 
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
       path: '/',
     })
+    console.log(this.props)
+          
+    this.props.history.replace('/')
 
-    window.location.replace('/')
+    
+    this.props.getAllProducts()
   }
 
   onSubmitFailure = errorMsg => {
     this.setState({showSubmitError: true, errorMsg})
   }
 
-  onformSubmit = async event => {
+  onformSubmit = async (event) => {
     event.preventDefault()
   
     const {username, password} = this.state
     const userDetails = {username, password}
-const url=`https://powerful-gear-bull.cyclic.app/login`
+const url=`https://tiny-foal-cardigan.cyclic.app/login`
     const options = {
       method: 'POST',
       headers: {
@@ -111,7 +116,11 @@ const url=`https://powerful-gear-bull.cyclic.app/login`
       return <Link to="/" />
     }
     return (
-      <div className="login-page-container">
+      <AgriContext.Consumer>
+
+      {value=>{
+       const {data,categories,selectedCategory,searchInput,activeOptionId,sortbyOptions,isUserLoggedIn,userDetails,status,inputChange,getAllProducts,onCategoryChange,sortChange,onAddCart,onAddWishlist,onPlaceOrder,onIncreaseQuantity,onDecreaseQuantity}=value;
+ return( <div className="login-page-container">
         <div className="login-card-container">
           <img
             alt="website login"
@@ -119,7 +128,8 @@ const url=`https://powerful-gear-bull.cyclic.app/login`
             src="https://res.cloudinary.com/du6aueulp/image/upload/v1699595893/z6j1ajzrllbhxrxxpuuv.png"
           />
           <div className="login-form-card">
-           
+          <Link to='/' className="go-back"><IoIosArrowRoundBack className="back-icon"/></Link>
+         
             <h1 className="login-heading">Log In to Proceed Next...</h1>
             <form onSubmit={this.onformSubmit} className="form-card">
               <div className="form-label-div">
@@ -200,7 +210,9 @@ const url=`https://powerful-gear-bull.cyclic.app/login`
                   <p className="errorMsg">{errorMsg}</p>
                 ) : null}
         <div className="login-register-container">
-    <p>New User ? <a href="/register">Register</a></p>
+    <Link to='/register'>
+      <p> New User ? Register</p>
+    </Link>
 </div>
          
        
@@ -212,8 +224,11 @@ const url=`https://powerful-gear-bull.cyclic.app/login`
 
           </div>
   
-    )
+ )
+           }}
+          </AgriContext.Consumer>
+           )
   }
 }
 
-export default Login
+export default withRouter(Login)

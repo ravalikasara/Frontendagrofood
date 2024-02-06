@@ -7,6 +7,8 @@ import { FaRupeeSign, FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 import { CiSquareRemove } from "react-icons/ci";
 import './index.css'
 
+
+
 class Cart extends Component {
   render() {
     return (
@@ -39,10 +41,14 @@ class Cart extends Component {
           onIncreaseQuantity(id)
           };
 
-          const onOrder=()=>{
-            window.location.replace('/order')
-          }
+         
+            const onOrder=(each)=>{
 
+              window.location.replace('/order')
+   
+            
+            }
+         
           return cart.length === 0 ? (
             <div className='cart-container empty-cart'>
               <img
@@ -109,7 +115,10 @@ class Cart extends Component {
                 <hr className='line' />
                 <h2 className="total-amount">Total: <FaRupeeSign />{sum}</h2>
                 <div className='checkout-buttons'>
-                  <button className='proceed-button' onClick={onOrder}>Proceed to Checkout</button>
+                <Link to='/order' className='link-go-back'>
+                <button className='proceed-button'>Proceed to Checkout</button>
+                  
+                  </Link>
                   <Link to='/' className='link-go-back'>
                     <button className='button-go-back'>Continue Shopping</button>
                   </Link>

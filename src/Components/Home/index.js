@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import {  withRouter} from "react-router-dom"
 import {Oval} from 'react-loader-spinner'
 import { LiaStarSolid } from "react-icons/lia"
 import {Link} from 'react-router-dom'
@@ -14,17 +15,24 @@ import { FaRupeeSign, FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 import Header from "../Header";
 import AgriContext from "../../agriContext";
 import "./index.css";
+import { MdAlignHorizontalCenter } from "react-icons/md";
 
 
 
 class Home extends Component {
 state={showPopup:false}
 
+
+
+
 onClose=()=>{
 
     this.setState({showPopup:false})
   
 }
+
+
+
 
   renderPopup = () => {
     return (
@@ -216,6 +224,7 @@ const onaddCart=(id)=>{
   if(isUserLoggedIn){
    onAddCart(id)
   }
+  
   else{
     this.setState({showPopup:true})
   }
@@ -239,15 +248,17 @@ const onaddCart=(id)=>{
 
 
 const onOrder=(each)=>{
-
+ 
+  this.props.history.push('/cart')
   if(isUserLoggedIn){
     onAddCart(each._id)
    }
    else{
      this.setState({showPopup:true})
    }
-  window.location.replace('/cart')
 
+   
+   
 }
 
   const settings = {
@@ -330,8 +341,11 @@ const onOrder=(each)=>{
              <button  onClick={()=>{onaddCart(each._id)}} type="button" className="cart-button" >
                   Add +
                 </button>
+            
                 <button type="button"  onClick={()=>{onOrder(each)}} className="buy-now-button">Buy Now</button>
-             </div>
+           
+       
+                 </div>
             </li>
           ))}
           </ul> :    <div className='cart-container empty-cart'>
@@ -376,7 +390,7 @@ const onOrder=(each)=>{
 
   render() {
     const {showPopup}=this.state
-    console.log(showPopup,"popup")
+   
     return (
      <AgriContext.Consumer>
 
@@ -395,4 +409,4 @@ return(
   }
 }
 
-export default Home;
+export default withRouter(Home);

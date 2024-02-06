@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
 
 import Cookies from 'js-cookie'
 
@@ -16,7 +16,7 @@ class Register extends Component {
 
 
     window.location.replace('/login')
-
+   
   
   }
 
@@ -55,7 +55,7 @@ class Register extends Component {
       })
     }
   
-    const response = await fetch('https://powerful-gear-bull.cyclic.app/register',options)
+    const response = await fetch('https://tiny-foal-cardigan.cyclic.app/register',options)
    
    const answer = await  response.json()
 
@@ -109,7 +109,7 @@ this.onSubmitSuccess()
           <div className="register-form-card">
            
            <div className="register-heading-card">
-            <a href ='/' className="go-back"><IoIosArrowRoundBack className="back-icon"/></a>
+            <Link to='/login' className="go-back"><IoIosArrowRoundBack className="back-icon"/></Link>
            <h1 className="register-heading">Register</h1>
            </div>
             <form onSubmit={this.onformSubmit} className="form-card">
@@ -182,4 +182,4 @@ this.onSubmitSuccess()
   }
 }
 
-export default Register
+export default withRouter(Register);
