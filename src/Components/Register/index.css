@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.register-page-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.register-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.register-page-image {
+  width: 582px;
+  height: 400px;
+
+}
+
+.register-form-card {
+  width: 456px;
+  height: 600px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  padding: 20px;
+  padding-bottom: 30px;
+  margin: 50px;
+  margin-bottom: 30px;
+}
+
+.register-page-website-logo {
+  height: 80px;
+  width: 80px;
+  align-self: center;
+}
+
+.register-heading {
+  font-family: 'Roboto';
+  font-size: 25px;
+  text-align: center;
+}
+register-heading-card{
+    display: flex;
+    flex-direction: column;
+   
+}
+.go-back{
+    color: rgba(64, 148, 239, 1);
+  
+
+
+
+}
+.back-icon{
+    width:20px;
+    height:20px;
+}
+
+.register-form-label {
+  width: 65px;
+  height: 16px;
+  margin: 10px 0px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.form-label-div {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form-input {
+  width: 360px;
+  height: 40px;
+  background-color: rgba(238, 238, 238, 1);
+  border-radius: 2px;
+  font-size: 22px;
+  border: none;
+}
+
+.register-button {
+  width: 360px;
+  height: 40px;
+  color: white;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  margin: 20px;
+  background-color: rgba(64, 148, 239, 1);
+}
+
+.errorMsg {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 20px;
+  color: rgba(239, 68, 68, 1);
+}
+
+@media (max-width: 768px) {
+  .register-page-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .register-form-card {
+    width: 300px;
+    height: 600px;
+    margin: 10px;
+  }
+
+  .register-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .register-form-input {
+    width: 250px;
+    height: 40px;
+  }
+
+  .register-button {
+    width: 250px;
+  }
+  .register-page-image {
+ display:none;
+  }
+}

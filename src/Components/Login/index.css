@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier New', Courier, monospace;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.login-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login-page-image {
+  width: 582px;
+  height: 400px;
+}
+
+@media (max-width: 768px) {
+  .login-page-image {
+    display: none;
+  }
+
+  .login-form-card {
+    width: 100%; /* Take full width on smaller screens */
+    max-width: 400px; /* Limit maximum width */
+    margin: 20px auto; /* Center horizontally */
+    font-size: 10px auto;
+  }
+}
+
+.login-form-card {
+  width: 456px;
+  height: 500px;
+  overflow-y: scroll;
+  top: 283px;
+  left: 824px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  padding: 20px;
+  padding-bottom: 30px;
+  margin: 50px;
+  margin-bottom: 30px;
+}
+
+.login-page-website-logo {
+  height: 80px;
+  width: 80px;
+  align-self: center;
+}
+
+.login-heading {
+  font-family: 'Roboto';
+  font-size: 25px;
+  align-self: center;
+}
+
+.login-form-label {
+  width: 65px;
+  height: 16px;
+  margin: 10px 0px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.form-label-div {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form-input {
+  width: 360px;
+  height: 40px;
+  background-color: rgba(238, 238, 238, 1);
+  border-radius: 2px;
+  font-size: 22px;
+  border: none;
+}
+
+.login-button {
+  width: 360px;
+  height: 40px;
+  color: white;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  margin: 20px;
+  background-color: rgba(64, 148, 239, 1);
+}
+
+.errorMsg {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 20px;
+  color: rgba(239, 68, 68, 1);
+}
+
+.google-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid #ccc;
+  margin: 0 10px;
+}
+
+.or-text {
+  color: #888;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.google-logo {
+  height: 20px;
+  width: 20px;
+  margin-top: 4px;
+}
+
+.google-image {
+  display: flex;
+  background-color: white;
+  margin-bottom: 20px;
+  height: 30px;
+  width: 350px;
+  padding: 3px;
+  justify-content: center;
+  border: none;
+  margin-left: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+}
+
+.login-button-google {
+  border: none;
+  margin-left: 20px;
+  outline: none;
+  background-color: transparent;
+}
+
+.facebook-image {
+  display: flex;
+  background-color: white;
+  margin-bottom: 20px;
+  height: 30px;
+  width: 350px;
+  padding: 3px;
+  justify-content: center;
+  border: none;
+  margin-left: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+  background-color: #3b5998;
+  color: white;
+}
+
+.facebook-logo {
+  color: white;
+  margin-top: 5px;
+}
+
+.login-button-facebook {
+  border: none;
+  margin-left: 20px;
+  outline: none;
+  color: white;
+  background-color: transparent;
+}
+
+.twitter-image {
+  display: flex;
+  background-color: white;
+  margin-bottom: 40px;
+  height: 30px;
+  width: 350px;
+  padding: 3px;
+  justify-content: center;
+  border: none;
+  margin-left: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+  background-color: #00acee;
+  color: white;
+}
+
+.login-register-container {
+  margin-left: 100px;
+  margin-top: 0px;
+}
